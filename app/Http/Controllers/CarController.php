@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Catalogue;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,16 +15,20 @@ class CarController extends Controller
         $cars= Car::find();
         return $cars;
     }
-    public function show(Car $cars)
+    public function show(Car $car)
     {
-        return $cars;
+        return $car;
     }
 
     public function store(Request $request)
     {
         $car = new Car();
+
         $car->product()->associate(Product::find($request->input('product')));
         $car->user()->associate(User::find($request->input('user')));
+
+        $car->catalogue()->associate(Catalogue::find($request->input('size.id')));
+        $car->catalogue()->associate(Catalogue::find($request->input('color.id')));
 
         $car->total_price = $request->input('totalPrice');
         $car->amount = $request->input('amount');
@@ -34,12 +39,14 @@ class CarController extends Controller
     }
     public function update(Request $request,Car $car)
     {
-        $car->category()->associate(Category::find($request->input('category')));
-        $car->name = $request->input('name');
-        $car->price = $request->input('price');
-        $car->image = $request->input('image');
-        $car->stock = $request->input('stock');
-        $car->description = $request->input('description');
+        $car->product()->associate(Product::find($request->input('product')));
+        $car->user()->associate(User::find($request->input('user')));
+
+        $car->catalogue()->associate(Catalogue::find($request->input('size.id')));
+        $car->catalogue()->associate(Catalogue::find($request->input('color.id')));
+
+        $car->total_price = $request->input('totalPrice');
+        $car->amount = $request->input('amount');
         $car->state = $request->input('state');
         $car->save();
 

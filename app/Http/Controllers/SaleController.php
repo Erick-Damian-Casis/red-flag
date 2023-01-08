@@ -24,8 +24,8 @@ class SaleController extends Controller
         $sale = new Sale();
         $sale->car()->associate(Car::find($request->input('car')));
         $sale->sale_at = now();
-        $sale->iva = 12;
         $sale->description = $request->input('description');
+        $sale->iva = 12;
         $sale->save();
         return $sale;
     }

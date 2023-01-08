@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//
+//Route::middleware('auth:sanctum')->group(function () {
+//    // visualizar comidas
+//    Route::group(['middleware' => ['permission:view_foods']], function () {
+//        Route::get('foods', [FoodsController::class, 'index']);
+//        Route::get('foods/{food}', [FoodsController::class, 'show']);
+//    });
+//
+//    // visualizar ordenes
+//    Route::group(['middleware' => ['permission:view_orders']], function () {
+//        Route::get('orders', [OrdersController::class, 'index']);
+//        Route::get('orders/{order}', [OrdersController::class, 'show']);
+//    });
+//
+//    // cerrar sesion
+//    Route::get('logout',[AuthController::class, 'logout']);
+//});
+

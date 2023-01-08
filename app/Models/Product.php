@@ -19,8 +19,19 @@ class Product extends Model
         'description',
         'state',
     ];
-
-    function category(){
-        return $this->belongsTo(Category::class);
+    // Relationship
+    function catalogue(){
+        return $this->belongsTo(Catalogue::class);
     }
+
+    function cars(){
+        return $this->hasMany(Car::class);
+    }
+
+    // Upper
+    public function setNameAttribute($value)
+    {
+        return $this->attributes['name'] = strtoupper($value);
+    }
+
 }

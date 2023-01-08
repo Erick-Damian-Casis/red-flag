@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Catalogue;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product();
-        $product->category()->associate(Category::find($request->input('category')));
+
+        $product->catalogue()
+            ->associate(Catalogue::find($request->input('category.id')));
+        $product->catalogue()
+            ->associate(Catalogue::find($request->input('gender.id')));
+
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->image = $request->input('image');
@@ -34,7 +39,11 @@ class ProductController extends Controller
     }
     public function update(Request $request,Product $product)
     {
-        $product->category()->associate(Category::find($request->input('category')));
+        $product->catalogue()
+            ->associate(Catalogue::find($request->input('category.id')));
+        $product->catalogue()
+            ->associate(Catalogue::find($request->input('gender.id')));
+
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->image = $request->input('image');

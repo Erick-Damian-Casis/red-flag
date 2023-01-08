@@ -20,12 +20,13 @@ class User extends Authenticatable
         'phone',
         'photo_profile',
     ];
+    // Relationship
 
-    public function setNameAttribute($value)
-    {
-        return $this->attributes['name'] = strtoupper($value);
+    function cars(){
+        return $this->hasMany(Car::class);
     }
 
+    // set
     public function setAddressAttribute($value)
     {
         return $this->attributes['address'] = strtoupper($value);

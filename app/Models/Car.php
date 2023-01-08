@@ -17,11 +17,21 @@ class Car extends Model
         'state',
     ];
 
+    // Relationship
+
     function user(){
         return $this->belongsTo(User::class);
     }
 
     function product(){
         return $this->belongsTo(Product::class);
+    }
+
+    function catalogue(){
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    function sales(){
+        return $this->hasMany(Sale::class);
     }
 }

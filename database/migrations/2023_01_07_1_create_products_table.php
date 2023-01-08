@@ -19,11 +19,16 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
 
             $table->foreignId('category_id')
-                ->constrained('categories');
+                ->constrained('catalogues');
+
+            $table->foreignId('gender_id')
+                ->constrained('catalogues');
 
             $table->string('name')->comment('nombre del producto');
             $table->float('price')->comment('costo del producto por unidad');
+            $table->float('score')->comment('Puntuación de calidad');
             $table->string('image')->comment('Imagen del producto');
+            $table->integer('discount')->comment('Imagen del producto')->nullable();
             $table->string('stock')->comment('Cantidad disponible');
             $table->text('description')->comment('Descripcion del producto');
             $table->boolean('state')->comment('estado del producto');

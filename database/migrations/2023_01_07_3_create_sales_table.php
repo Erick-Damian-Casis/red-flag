@@ -21,6 +21,7 @@ class CreateSalesTable extends Migration
             $table->foreignId('car_id')
                 ->constrained('cars');
 
+            $table->string('invoice')->comment('Numero de factura');
             $table->float('description')->comment('descripcion sobre la venta');
             $table->float('iva')->comment('Impuesto sobre el Valor Añadido');
             $table->date('sale_at')->comment('fecha de compra');
