@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->comment('Imagen del producto');
             $table->string('stock')->comment('Cantidad disponible');
             $table->text('description')->comment('Descripcion del producto');
-            $table->boolean('state');
+            $table->boolean('state')->comment('estado del producto');
         });
     }
 

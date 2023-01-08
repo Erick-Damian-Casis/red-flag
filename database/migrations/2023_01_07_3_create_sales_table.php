@@ -18,8 +18,8 @@ class CreateSalesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId('user_id')
-                ->constrained('users');
+            $table->foreignId('car_id')
+                ->constrained('cars');
 
             $table->float('description')->comment('descripcion sobre la venta');
             $table->float('iva')->comment('Impuesto sobre el Valor Añadido');
