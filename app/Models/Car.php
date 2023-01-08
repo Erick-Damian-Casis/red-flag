@@ -14,15 +14,13 @@ class Car extends Model
     protected $fillable=[
         'total_price',
         'amount',
-        'image',
-        'stock',
-        'description',
         'state',
     ];
 
     function user(){
         return $this->belongsTo(User::class);
     }
+
     function product(){
         return $this->belongsTo(Product::class);
     }
