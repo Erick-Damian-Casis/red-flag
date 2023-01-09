@@ -13,20 +13,11 @@ class Sale extends Model
 
     protected $fillable=[
         'invoice',
-        'description',
-        'iva',
-        'sale_at',
+        'total',
     ];
 
     function car(){
         return $this->belongsTo(Car::class);
     }
-
-    // Upper
-    public function setDescriptionAttribute($value)
-    {
-        return $this->attributes['description'] = strtoupper($value);
-    }
-
 
 }

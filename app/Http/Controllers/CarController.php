@@ -24,14 +24,13 @@ class CarController extends Controller
     {
         $car = new Car();
 
-        $car->product()->associate(Product::find($request->input('product')));
-        $car->user()->associate(User::find($request->input('user')));
+        $car->product()->associate(Product::find($request->input('product.id')));
+        $car->user()->associate(User::find($request->input('user.id')));
 
-        $car->catalogue()->associate(Catalogue::find($request->input('size.id')));
-        $car->catalogue()->associate(Catalogue::find($request->input('color.id')));
-
-        $car->total_price = $request->input('totalPrice');
+        $car->size()->associate(Catalogue::find($request->input('size.id')));
+        $car->color()->associate(Catalogue::find($request->input('color.id')));
         $car->amount = $request->input('amount');
+        $car->total_price = $this->calculatePrice($car);
         $car->state = $request->input('state');
         $car->save();
 
@@ -39,14 +38,13 @@ class CarController extends Controller
     }
     public function update(Request $request,Car $car)
     {
-        $car->product()->associate(Product::find($request->input('product')));
-        $car->user()->associate(User::find($request->input('user')));
+        $car->product()->associate(Product::find($request->input('product.id')));
+        $car->user()->associate(User::find($request->input('user.id')));
 
-        $car->catalogue()->associate(Catalogue::find($request->input('size.id')));
-        $car->catalogue()->associate(Catalogue::find($request->input('color.id')));
-
-        $car->total_price = $request->input('totalPrice');
+        $car->size()->associate(Catalogue::find($request->input('size.id')));
+        $car->color()->associate(Catalogue::find($request->input('color.id')));
         $car->amount = $request->input('amount');
+        $car->total_price = $this->calculatePrice($car);
         $car->state = $request->input('state');
         $car->save();
 
@@ -57,5 +55,11 @@ class CarController extends Controller
     {
         $car->delete();
         return $car;
+    }
+
+    private function calculatePrice($car){
+        $price = $car->product->price;
+        $amount = $car->amount;
+        return $price * $amount;
     }
 }

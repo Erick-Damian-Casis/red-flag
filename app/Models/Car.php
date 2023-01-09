@@ -27,7 +27,10 @@ class Car extends Model
         return $this->belongsTo(Product::class);
     }
 
-    function catalogue(){
+    function size(){
+        return $this->belongsTo(Catalogue::class);
+    }
+    function color(){
         return $this->belongsTo(Catalogue::class);
     }
 

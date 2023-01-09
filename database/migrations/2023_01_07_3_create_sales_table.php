@@ -22,9 +22,7 @@ class CreateSalesTable extends Migration
                 ->constrained('cars');
 
             $table->string('invoice')->comment('Numero de factura');
-            $table->float('description')->comment('descripcion sobre la venta');
-            $table->float('iva')->comment('Impuesto sobre el Valor Añadido');
-            $table->date('sale_at')->comment('fecha de compra');
+            $table->float('total')->comment('Total de la compra a facturar');
 
 
         });

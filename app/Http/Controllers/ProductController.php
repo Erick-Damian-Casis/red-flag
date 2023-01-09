@@ -22,15 +22,19 @@ class ProductController extends Controller
     {
         $product = new Product();
 
-        $product->catalogue()
+        $product->category()
             ->associate(Catalogue::find($request->input('category.id')));
-        $product->catalogue()
+
+        $product->gender()
             ->associate(Catalogue::find($request->input('gender.id')));
 
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->image = $request->input('image');
         $product->stock = $request->input('stock');
+        $product->score = $request->input('score');
+        $product->discount = $request->input('discount');
+        $product->price_discount = $this->applydiscount($product);
         $product->description = $request->input('description');
         $product->state = $request->input('state');
         $product->save();
@@ -48,6 +52,9 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->image = $request->input('image');
         $product->stock = $request->input('stock');
+        $product->score = $request->input('score');
+        $product->discount = $request->input('discount');
+        $product->price_discount = $this->applydiscount($product);
         $product->description = $request->input('description');
         $product->state = $request->input('state');
         $product->save();
@@ -59,5 +66,13 @@ class ProductController extends Controller
     {
         $product->delete();
         return $product;
+    }
+
+    private function applydiscount(Product $product)
+    {
+        $price = $product->price;
+        $discount = $product->discount;
+        $totalPrice = ($price * $discount)/100;
+        return $price-$totalPrice;
     }
 }

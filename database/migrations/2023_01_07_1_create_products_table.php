@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->float('score')->comment('Puntuación de calidad');
             $table->string('image')->comment('Imagen del producto');
             $table->integer('discount')->comment('Imagen del producto')->nullable();
+            $table->float('price_discount')->comment('total del producto con descuento incluido')->nullable();
             $table->string('stock')->comment('Cantidad disponible');
             $table->text('description')->comment('Descripcion del producto');
             $table->boolean('state')->comment('estado del producto');

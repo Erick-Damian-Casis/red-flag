@@ -18,9 +18,15 @@ class Product extends Model
         'stock',
         'description',
         'state',
+        'price_discount',
     ];
+
     // Relationship
-    function catalogue(){
+    function category(){
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    function gender(){
         return $this->belongsTo(Catalogue::class);
     }
 
