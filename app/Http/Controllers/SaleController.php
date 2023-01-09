@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\V1\Sale\SaleCollection;
+use App\Http\Resources\V1\Sale\SaleResource;
 use App\Models\Car;
 use App\Models\Product;
 use App\Models\Sale;
@@ -12,12 +14,24 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::find();
-        return $sales;
+        return (new SaleCollection($sales))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     public function show(Sale $sale)
     {
-        return $sale;
+        return (new SaleResource($sale))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     public function store(Request $request)
@@ -28,11 +42,17 @@ class SaleController extends Controller
         $sale->total = $this->calculateTotal($sale);
         $this->discountStock($sale);
         $sale->save();
-        return $sale;
+        return (new SaleResource($sale))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => 'Compra realizada',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     private function calculateTotal($sale){
-        $cars= Car::where('user_id',$sale->car_id)->get();
+        $cars= Car::where('user_id',$sale->car_id)->select($sale->car_id->state, true)->get();
         $total = 0;
         foreach ($cars as $car){
             $total = $total + $car->total_price;

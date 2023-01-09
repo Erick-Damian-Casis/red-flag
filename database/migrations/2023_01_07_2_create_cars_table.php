@@ -32,7 +32,7 @@ class CreateCarsTable extends Migration
 
             $table->float('total_price')->comment('precio por cantidad');
             $table->float('amount')->comment('cantidad de producto solicitado');
-            $table->float('state')->comment('estado de carrito true->comprado false->pendiente');
+            $table->boolean('state')->comment('estado de carrito true->comprado false->pendiente');
 
         });
     }

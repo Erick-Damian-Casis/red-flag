@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\V1\Product\ProductCollection;
+use App\Http\Resources\V1\Product\ProductResource;
 use App\Models\Catalogue;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,11 +13,23 @@ class ProductController extends Controller
     public function index()
     {
         $products= Product::find();
-        return $products;
+        return (new ProductCollection($products))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
     public function show(Product $product)
     {
-        return $product;
+        return (new ProductResource($product))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     public function store(Request $request)
@@ -39,7 +53,13 @@ class ProductController extends Controller
         $product->state = $request->input('state');
         $product->save();
 
-        return $product;
+        return (new ProductResource($product))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => 'EL producto a sido creado',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
     public function update(Request $request,Product $product)
     {
@@ -59,13 +79,25 @@ class ProductController extends Controller
         $product->state = $request->input('state');
         $product->save();
 
-        return $product;
+        return (new ProductResource($product))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => 'Producto actualizado',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return $product;
+        return (new ProductResource($product))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => 'Producto elminado',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 
     private function applydiscount(Product $product)
