@@ -10,6 +10,7 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=> $this->id,
             'category'=> CatalogueResource::make($this->category),
             'gender'=> CatalogueResource::make($this->gender),
             'name'=> $this->name,

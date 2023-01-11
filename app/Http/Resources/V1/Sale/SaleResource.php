@@ -10,6 +10,7 @@ class SaleResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=> $this->id,
             'car'=> CarResource::make($this->car),
             'invoice'=> $this->invoice,
             'total'=> $this->total,

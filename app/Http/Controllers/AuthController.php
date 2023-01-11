@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -17,8 +18,12 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
-        $user->photo_profile = $request->input('photoProfile');
         $user->password =  Hash::make($request->input('password'));
+        if ($request->hasFile('photoProfile')){
+            $user->photo_profile = Storage::url($request->file('photoProfile')
+                ->store('public/photoProfiles')
+            );
+        }
         $user->save();
         return response([
             'message'=>'Success Register'

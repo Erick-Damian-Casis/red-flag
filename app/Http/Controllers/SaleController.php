@@ -36,11 +36,13 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+        $user= 1;
         $sale = new Sale();
         $sale->car()->associate(Car::find($request->input('car.id')));
         $sale->invoice = $request->input('invoice');
-        $sale->total = $this->calculateTotal($sale);
         $this->discountStock($sale);
+
+        $sale->total = $this->calculateTotal($user);
         $sale->save();
         return (new SaleResource($sale))->additional([
             'msg'=>[
@@ -51,8 +53,8 @@ class SaleController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    private function calculateTotal($sale){
-        $cars= Car::where('user_id',$sale->car_id)->select($sale->car_id->state, true)->get();
+    private function calculateTotal($user){
+        $cars = Car::where("user_id",1)->get();
         $total = 0;
         foreach ($cars as $car){
             $total = $total + $car->total_price;

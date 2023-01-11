@@ -45,8 +45,8 @@ class CarController extends Controller
         $car->size()->associate(Catalogue::find($request->input('size.id')));
         $car->color()->associate(Catalogue::find($request->input('color.id')));
         $car->amount = $request->input('amount');
-        $car->total_price = $this->calculatePrice($car);
         $car->state = $request->input('state');
+        $car->total_price = $this->calculatePrice($car);
         $car->save();
 
         return (new CarResource($car))->additional([

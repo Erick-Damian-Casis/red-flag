@@ -7,6 +7,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogueController;
+use App\Http\Controllers\ChatController;
 
 
 /*
@@ -42,12 +43,15 @@ Route::put('cars/car}', [CarController::class, 'update']);
 Route::delete('cars/car}', [CarController::class, 'destroy']);
 
 // Sale
-Route::get('cars', [SaleController::class, 'index']);
-Route::get('cars/{car}', [SaleController::class, 'show']);
-Route::post('cars', [SaleController::class, 'store']);
+Route::get('sales', [SaleController::class, 'index']);
+Route::get('sales/{sale}', [SaleController::class, 'show']);
+Route::post('sales', [SaleController::class, 'store']);
 
 // User
 Route::get('users', [UserController::class, 'index']);
 Route::get('users/{user}', [UserController::class, 'show']);
 Route::put('users/user}', [UserController::class, 'update']);
 Route::delete('users/user}', [UserController::class, 'destroy']);
+
+// Chat
+Route::post('messages', [ChatController::class, 'message']);
