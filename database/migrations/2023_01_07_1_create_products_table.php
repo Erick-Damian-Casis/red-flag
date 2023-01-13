@@ -19,10 +19,14 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
 
             $table->foreignId('category_id')
-                ->constrained('catalogues');
+                ->constrained('catalogues')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreignId('gender_id')
-                ->constrained('catalogues');
+                ->constrained('catalogues')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->string('name')->comment('nombre del producto');
             $table->float('price')->comment('costo del producto por unidad');

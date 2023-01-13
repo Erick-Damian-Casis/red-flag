@@ -18,17 +18,26 @@ class CreateCarsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId('user_id')
-                ->constrained('users');
-
             $table->foreignId('product_id')
-                ->constrained('products');
+                ->constrained('products')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreignId('size_id')
-                ->constrained('catalogues');
+                ->constrained('catalogues')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreignId('color_id')
-                ->constrained('catalogues');
+                ->constrained('catalogues')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->float('total_price')->comment('precio por cantidad');
             $table->float('amount')->comment('cantidad de producto solicitado');

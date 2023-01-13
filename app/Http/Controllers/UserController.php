@@ -11,7 +11,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::find();
+        $users = User::get();
     }
 
     public function show(User $user)

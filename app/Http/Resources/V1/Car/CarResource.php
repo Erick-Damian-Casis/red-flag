@@ -12,6 +12,7 @@ class CarResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=> $this->id,
             'product'=> ProductResource::make($this->product),
             'user'=> UserResource::make($this->user),
             'size'=> CatalogueResource::make($this->size),

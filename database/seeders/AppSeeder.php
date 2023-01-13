@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Catalogue;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AppSeeder extends Seeder
 {
@@ -66,5 +68,21 @@ class AppSeeder extends Seeder
             'name'=>'L',
             'type'=> 'size',
         ]);
+
+        User::factory()->create([
+            'name'=> 'Danny Casis',
+            'email'=> 'danny_casis@gmail.com',
+            'address'=> 'Quitumbe',
+            'password'=> Hash::make('159632100'),
+            'phone'=> '0983379238',
+        ])->assignRole('admin');
+
+        User::factory()->create([
+            'name'=> 'admin',
+            'email'=> 'admin@gmail.com',
+            'address'=> 'admin',
+            'password'=> Hash::make('admin'),
+            'phone'=> '0983379238',
+        ])->assignRole('super-admin');
     }
 }

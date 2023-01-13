@@ -13,7 +13,7 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::find();
+        $sales = Sale::get();
         return (new SaleCollection($sales))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -36,12 +36,11 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-        $user= 1;
+        $user= 2;
         $sale = new Sale();
-        $sale->car()->associate(Car::find($request->input('car.id')));
+        $sale->car()->associate(Car::find($request->input('car')));
         $sale->invoice = $request->input('invoice');
         $this->discountStock($sale);
-
         $sale->total = $this->calculateTotal($user);
         $sale->save();
         return (new SaleResource($sale))->additional([
@@ -54,7 +53,7 @@ class SaleController extends Controller
     }
 
     private function calculateTotal($user){
-        $cars = Car::where("user_id",1)->get();
+        $cars = Car::where("user_id",$user)->get();
         $total = 0;
         foreach ($cars as $car){
             $total = $total + $car->total_price;

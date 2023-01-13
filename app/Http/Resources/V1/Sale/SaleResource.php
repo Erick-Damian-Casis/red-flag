@@ -14,7 +14,6 @@ class SaleResource extends JsonResource
             'car'=> CarResource::make($this->car),
             'invoice'=> $this->invoice,
             'total'=> $this->total,
-
             'score'=> $this->score,
             'discount'=> $this->discount,
             'priceDiscount'=> $this->price_discount,

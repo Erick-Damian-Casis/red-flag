@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 class AuthController extends Controller
 {
     public function register(Request $request){
-
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -24,10 +23,11 @@ class AuthController extends Controller
                 ->store('public/photoProfiles')
             );
         }
+        $user->assignRole('user');
         $user->save();
         return response([
             'message'=>'Success Register'
-        ], 404);
+        ], 200);
     }
 
     public function login(Request $request){

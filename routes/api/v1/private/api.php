@@ -8,6 +8,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -21,37 +22,49 @@ use App\Http\Controllers\ChatController;
 |
 */
 
-//
-//Route::middleware('auth:sanctum')->group(function () {
-//    Route::get('logout',[AuthController::class, 'logout']);
-//});
-// Products
-Route::get('products', [ProductController::class, 'index']);
-Route::get('products/{product}', [ProductController::class, 'show']);
-Route::post('products', [ProductController::class, 'store']);
-Route::put('products/{product}', [ProductController::class, 'update']);
-Route::delete('products/{product}', [ProductController::class, 'destroy']);
 
-// Catalogue
-Route::get('catalogues', [CatalogueController::class, 'index']);
+Route::middleware('auth:sanctum')->group(function () {
 
-// cars
-Route::get('cars', [CarController::class, 'index']);
-Route::get('cars/{car}', [CarController::class, 'show']);
-Route::post('cars', [CarController::class, 'store']);
-Route::put('cars/car}', [CarController::class, 'update']);
-Route::delete('cars/car}', [CarController::class, 'destroy']);
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('products', [ProductController::class, 'index']);
+        Route::post('products', [ProductController::class, 'store']);
+        Route::put('products/{product}', [ProductController::class, 'update']);
+        Route::delete('products/{product}', [ProductController::class, 'destroy']);
+    });
+        // Products
+        Route::get('products/{product}', [ProductController::class, 'show']);
+        Route::get('products-male', [ProductController::class, 'productMale']);
+        Route::get('products-female', [ProductController::class, 'productFemale']);
 
-// Sale
-Route::get('sales', [SaleController::class, 'index']);
-Route::get('sales/{sale}', [SaleController::class, 'show']);
-Route::post('sales', [SaleController::class, 'store']);
+        // Catalogue
+        Route::get('gender-catalogues', [CatalogueController::class, 'getGender']);
+        Route::get('category-catalogues', [CatalogueController::class, 'getCategory']);
+        Route::get('color-catalogues', [CatalogueController::class, 'getColor']);
+        Route::get('size-catalogues', [CatalogueController::class, 'getSize']);
+        // cars
+        Route::get('cars', [CarController::class, 'index']);
+        Route::get('cars/{car}', [CarController::class, 'show']);
+        Route::post('cars', [CarController::class, 'store']);
+        Route::put('cars/car}', [CarController::class, 'update']);
+        Route::delete('cars/car}', [CarController::class, 'destroy']);
 
-// User
-Route::get('users', [UserController::class, 'index']);
-Route::get('users/{user}', [UserController::class, 'show']);
-Route::put('users/user}', [UserController::class, 'update']);
-Route::delete('users/user}', [UserController::class, 'destroy']);
+        // Sale
+        Route::get('sales', [SaleController::class, 'index']);
+        Route::get('sales/{sale}', [SaleController::class, 'show']);
+        Route::post('sales', [SaleController::class, 'store']);
 
-// Chat
-Route::post('messages', [ChatController::class, 'message']);
+        // User
+        Route::get('users', [UserController::class, 'index']);
+        Route::get('users/{user}', [UserController::class, 'show']);
+        Route::put('users/user}', [UserController::class, 'update']);
+        Route::delete('users/user}', [UserController::class, 'destroy']);
+
+        // Chat
+        Route::post('messages', [ChatController::class, 'message']);
+
+
+    Route::get('logout',[AuthController::class, 'logout']);
+});
+
+
+
