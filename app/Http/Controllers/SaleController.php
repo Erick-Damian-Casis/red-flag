@@ -8,12 +8,15 @@ use App\Models\Car;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
     public function index()
     {
+        $user= Auth::user()->getAuthIdentifier();
         $sales = Sale::get();
+
         return (new SaleCollection($sales))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -25,6 +28,7 @@ class SaleController extends Controller
 
     public function show(Sale $sale)
     {
+//        return $sale->car->user->name;
         return (new SaleResource($sale))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -36,7 +40,7 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-        $user= 2;
+        $user= Auth::user()->getAuthIdentifier();
         $sale = new Sale();
         $sale->car()->associate(Car::find($request->input('car')));
         $sale->invoice = $request->input('invoice');
@@ -66,5 +70,25 @@ class SaleController extends Controller
         $productDiscount = Product::where('id', $sale->car->product_id)->first();
         $productDiscount->stock = $productDiscount->stock-1;
         $productDiscount->save();
+    }
+
+    public function salesByUser()
+    {
+        $user = Auth::user()->getAuthIdentifier();
+
+        $sales = Sale::get();
+
+//        $participant = Participant::where('user_id', $request->user()->id)->first();
+//        $registration = Registration::where('detail_planification_id',$detailPlanification->id)
+//            ->where('participant_id',$participant->id)
+//            ->paginate($request->input('per_page'));;
+
+        return (new SaleCollection($sales))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
 }

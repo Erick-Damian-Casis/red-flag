@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AuthController;
+use App\Models\User;
 
 
 /*
@@ -26,11 +27,13 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('products', [ProductController::class, 'index']);
         Route::post('products', [ProductController::class, 'store']);
         Route::put('products/{product}', [ProductController::class, 'update']);
         Route::delete('products/{product}', [ProductController::class, 'destroy']);
+
+        Route::get('users', [UserController::class, 'index']);
     });
+        Route::get('products', [ProductController::class, 'index']);
         // Products
         Route::get('products/{product}', [ProductController::class, 'show']);
         Route::get('products-male', [ProductController::class, 'productMale']);
@@ -45,11 +48,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('cars', [CarController::class, 'index']);
         Route::get('cars/{car}', [CarController::class, 'show']);
         Route::post('cars', [CarController::class, 'store']);
-        Route::put('cars/car}', [CarController::class, 'update']);
+        Route::put('cars/{car}', [CarController::class, 'update']);
         Route::delete('cars/car}', [CarController::class, 'destroy']);
 
         // Sale
         Route::get('sales', [SaleController::class, 'index']);
+        Route::get('sales-user', [SaleController::class, 'salesByUser']);
         Route::get('sales/{sale}', [SaleController::class, 'show']);
         Route::post('sales', [SaleController::class, 'store']);
 

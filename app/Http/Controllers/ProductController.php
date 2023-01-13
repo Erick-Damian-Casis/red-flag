@@ -106,7 +106,7 @@ class ProductController extends Controller
         $product->image = $request->input('image');
         $product->stock = $request->input('stock');
         $product->discount = $request->input('discount');
-        $product->price_discount = $this->applydiscount($product);
+        $product->price_discount = $this->applyDiscount($product);
         $product->description = $request->input('description');
         $product->state = $request->input('state');
         $product->save();
@@ -133,7 +133,7 @@ class ProductController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    private function applydiscount(Product $product)
+    private function applyDiscount(Product $product)
     {
         $price = $product->price;
         $discount = $product->discount;

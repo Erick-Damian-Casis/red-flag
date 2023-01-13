@@ -9,12 +9,14 @@ use App\Models\Catalogue;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
 {
     public function index()
     {
-        $cars= Car::get();
+        $user= Auth::user()->getAuthIdentifier();
+        $cars= Car::where('id',$user)->get();
         return (new CarCollection($cars))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -37,9 +39,10 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
+        $user= Auth::user()->getAuthIdentifier();
         $car = new Car();
         $car->product()->associate(Product::find($request->input('product')));
-        $car->user()->associate(User::find($request->input('user')));
+        $car->user()->associate(User::find($user));
 
         $car->size()->associate(Catalogue::find($request->input('size')));
         $car->color()->associate(Catalogue::find($request->input('color')));
@@ -59,9 +62,6 @@ class CarController extends Controller
 
     public function update(Request $request,Car $car)
     {
-        $car->product()->associate(Product::find($request->input('product')));
-        $car->user()->associate(User::find($request->input('user')));
-
         $car->size()->associate(Catalogue::find($request->input('size')));
         $car->color()->associate(Catalogue::find($request->input('color')));
         $car->amount = $request->input('amount');

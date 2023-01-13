@@ -14,11 +14,7 @@ class SaleResource extends JsonResource
             'car'=> CarResource::make($this->car),
             'invoice'=> $this->invoice,
             'total'=> $this->total,
-            'score'=> $this->score,
-            'discount'=> $this->discount,
-            'priceDiscount'=> $this->price_discount,
-            'description'=> $this->description,
-            'state'=> $this->state,
+            'date'=> $this->created_at,
         ];
     }
 }
