@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('products/{product}', [ProductController::class, 'show']);
         Route::get('products-male', [ProductController::class, 'productMale']);
         Route::get('products-female', [ProductController::class, 'productFemale']);
+        Route::get('products', [ProductController::class, 'index']);
 
         // Catalogue
         Route::get('gender-catalogues', [CatalogueController::class, 'getGender']);
@@ -49,7 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('cars/{car}', [CarController::class, 'show']);
         Route::post('cars', [CarController::class, 'store']);
         Route::put('cars/{car}', [CarController::class, 'update']);
-        Route::delete('cars/car}', [CarController::class, 'destroy']);
+        Route::delete('cars/{car}', [CarController::class, 'destroy']);
 
         // Sale
         Route::get('sales', [SaleController::class, 'index']);
@@ -59,9 +60,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // User
         Route::get('users', [UserController::class, 'index']);
-        Route::get('users/{user}', [UserController::class, 'show']);
-        Route::put('users/user}', [UserController::class, 'update']);
-        Route::delete('users/user}', [UserController::class, 'destroy']);
+        Route::get('users-profile', [UserController::class, 'show']);
+        Route::put('users/{user}', [UserController::class, 'update']);
+        Route::delete('users/{user}', [UserController::class, 'destroy']);
 
         // Chat
         Route::post('messages', [ChatController::class, 'message']);

@@ -16,7 +16,7 @@ class CarController extends Controller
     public function index()
     {
         $user= Auth::user()->getAuthIdentifier();
-        $cars= Car::where('id',$user)->get();
+        $cars= Car::where('user_id',$user)->get();
         return (new CarCollection($cars))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -47,7 +47,7 @@ class CarController extends Controller
         $car->size()->associate(Catalogue::find($request->input('size')));
         $car->color()->associate(Catalogue::find($request->input('color')));
         $car->amount = $request->input('amount');
-        $car->state = $request->input('state');
+        $car->state = false;
         $car->total_price = $this->calculatePrice($car);
         $car->save();
 
