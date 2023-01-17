@@ -16,8 +16,10 @@ class Sale extends Model
         'total',
     ];
 
-    function car(){
-        return $this->belongsTo(Car::class);
+    function payment(){
+        return $this->belongsTo(Payment::class);
     }
-
+    function cars(){
+        return $this->hasMany(Car::class);
+    }
 }

@@ -47,7 +47,6 @@ class CarController extends Controller
         $car->size()->associate(Catalogue::find($request->input('size')));
         $car->color()->associate(Catalogue::find($request->input('color')));
         $car->amount = $request->input('amount');
-        $car->state = false;
         $car->total_price = $this->calculatePrice($car);
         $car->save();
 
@@ -66,7 +65,6 @@ class CarController extends Controller
         $car->color()->associate(Catalogue::find($request->input('color')));
         $car->amount = $request->input('amount');
         $car->total_price = $this->calculatePrice($car);
-        $car->state = $request->input('state');
         $car->save();
 
         return (new CarResource($car))->additional([
@@ -91,7 +89,7 @@ class CarController extends Controller
     }
 
     private function calculatePrice($car){
-        $price = $car->product->price;
+        $price = $car->product->price_discount;
         $amount = $car->amount;
         return $price * $amount;
     }

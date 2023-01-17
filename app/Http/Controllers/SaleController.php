@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\V1\Sale\SaleCollection;
 use App\Http\Resources\V1\Sale\SaleResource;
 use App\Models\Car;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -40,13 +41,17 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-        $count = Sale::get()->count();
         $user= Auth::user()->getAuthIdentifier();
+        $count = Sale::get()->count();
         $sale = new Sale();
-        $sale->invoice = $count;
-        $this->discountStock($sale);
+        $sale->invoice = $count+1;
+//        $this->discountStock($user);
         $sale->total = $this->calculateTotal($user);
+        $sale->payment()->associate(Payment::find($request->input('payment')));
         $sale->save();
+
+        $this->invoiceProducts($sale, $user);
+
         return (new SaleResource($sale))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -66,11 +71,18 @@ class SaleController extends Controller
         return $total-$iva;
     }
 
-    private function discountStock($sale){
-        $productDiscount = Product::where('id', $sale->car->product_id)->first();
-        $productDiscount->stock = $productDiscount->stock-1;
-        $productDiscount->save();
+    private function invoiceProducts($sale, $user){
+        $cars= Car::where('user_id', $user)->get();
+        foreach ($cars as $car){
+            $car->sale()->associate(Sale::find($sale->id));
+            $car->save();
+        }
+        return $cars;
     }
+
+//    private function discountStock($user){
+//
+//    }
 
     public function salesByUser()
     {

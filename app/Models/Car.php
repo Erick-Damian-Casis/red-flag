@@ -34,7 +34,7 @@ class Car extends Model
         return $this->belongsTo(Catalogue::class);
     }
 
-    function sales(){
-        return $this->hasMany(Sale::class);
+    function sale(){
+        return $this->belongsTo(Sale::class);
     }
 }

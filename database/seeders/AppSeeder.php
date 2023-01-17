@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Catalogue;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -84,5 +85,12 @@ class AppSeeder extends Seeder
             'password'=> Hash::make('admin'),
             'phone'=> '0983379238',
         ])->assignRole('super-admin');
+
+        Payment::factory()->create([
+            'name'=> 'PayPal',
+        ]);
+        Payment::factory()->create([
+            'name'=> 'Transferencia',
+        ]);
     }
 }

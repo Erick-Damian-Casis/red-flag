@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1\Sale;
 
 use App\Http\Resources\V1\Car\CarResource;
+use App\Http\Resources\V1\Payment\PaymentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SaleResource extends JsonResource
@@ -11,8 +12,8 @@ class SaleResource extends JsonResource
     {
         return [
             'id'=> $this->id,
-            'car'=> CarResource::make($this->car),
             'invoice'=> $this->invoice,
+            'payment'=> PaymentResource::make($this->payment),
             'total'=> $this->total,
             'date'=> $this->created_at,
         ];
