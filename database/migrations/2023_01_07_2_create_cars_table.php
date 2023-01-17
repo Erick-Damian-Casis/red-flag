@@ -23,7 +23,6 @@ class CreateCarsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onUpdate('cascade')
@@ -36,6 +35,12 @@ class CreateCarsTable extends Migration
 
             $table->foreignId('color_id')
                 ->constrained('catalogues')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('sale_id')
+                ->nullable()
+                ->constrained('sales')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

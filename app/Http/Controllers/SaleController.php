@@ -40,10 +40,10 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+        $count = Sale::get()->count();
         $user= Auth::user()->getAuthIdentifier();
         $sale = new Sale();
-        $sale->car()->associate(Car::find($request->input('car')));
-        $sale->invoice = $request->input('invoice');
+        $sale->invoice = $count;
         $this->discountStock($sale);
         $sale->total = $this->calculateTotal($user);
         $sale->save();
