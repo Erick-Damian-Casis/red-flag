@@ -34,6 +34,10 @@ class Product extends Model
         return $this->hasMany(Car::class);
     }
 
+    function favorites(){
+        return $this->hasMany(Favorite::class);
+    }
+
     // Upper
     public function setNameAttribute($value)
     {

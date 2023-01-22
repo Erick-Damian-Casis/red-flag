@@ -26,6 +26,10 @@ class User extends Authenticatable
         return $this->hasMany(Car::class);
     }
 
+    function sales(){
+        return $this->hasMany(Sale::class);
+    }
+
     // set
     public function setAddressAttribute($value)
     {

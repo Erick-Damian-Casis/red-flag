@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,6 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $user= Auth::user()->getAuthIdentifier();
         $sales = Sale::get();
 
         return (new SaleCollection($sales))->additional([
@@ -29,7 +29,6 @@ class SaleController extends Controller
 
     public function show(Sale $sale)
     {
-//        return $sale->car->user->name;
         return (new SaleResource($sale))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -42,12 +41,14 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $user= Auth::user()->getAuthIdentifier();
+
         $count = Sale::get()->count();
         $sale = new Sale();
         $sale->invoice = $count+1;
 //        $this->discountStock($user);
         $sale->total = $this->calculateTotal($user);
-        $sale->payment()->associate(Payment::find($request->input('payment')));
+        $sale->user()->associate(User::find($user));
+        $sale->payment()->associate(Payment::find(1));
         $sale->save();
 
         $this->invoiceProducts($sale, $user);
@@ -80,20 +81,11 @@ class SaleController extends Controller
         return $cars;
     }
 
-//    private function discountStock($user){
-//
-//    }
-
     public function salesByUser()
     {
         $user = Auth::user()->getAuthIdentifier();
 
-        $sales = Sale::get();
-
-//        $participant = Participant::where('user_id', $request->user()->id)->first();
-//        $registration = Registration::where('detail_planification_id',$detailPlanification->id)
-//            ->where('participant_id',$participant->id)
-//            ->paginate($request->input('per_page'));;
+        $sales = Sale::where('user_id',$user)->get();
 
         return (new SaleCollection($sales))->additional([
             'msg'=>[

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalesTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreignId('product_id')
+                ->constrained('products');
+
             $table->foreignId('user_id')
                 ->constrained('users');
-
-            $table->foreignId('payment_id')
-                ->constrained('payments');
-
-            $table->string('invoice')->comment('Numero de factura');
-            $table->float('total')->comment('Total de la compra a facturar');
-
-
         });
     }
 
@@ -38,6 +33,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('favorites');
     }
 }

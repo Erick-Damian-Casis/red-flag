@@ -5,19 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sale extends Model
+class Favorite extends Model
 {
     use HasFactory;
 
-    protected $table='sales';
+    protected $table='favorites';
 
-    protected $fillable=[
-        'invoice',
-        'total',
-    ];
+    protected $fillable=[];
 
-    function payment(){
-        return $this->belongsTo(Payment::class);
+    function product(){
+        return $this->belongsTo(Product::class);
     }
     function user(){
         return $this->belongsTo(User::class);

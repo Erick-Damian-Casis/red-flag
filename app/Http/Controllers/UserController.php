@@ -36,8 +36,9 @@ class UserController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
+        $user = Auth::user();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->address = $request->input('address');

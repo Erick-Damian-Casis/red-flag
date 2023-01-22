@@ -20,6 +20,7 @@ class CarResource extends JsonResource
             'size'=> CatalogueResource::make($this->size),
             'color'=> CatalogueResource::make($this->color),
             'totalPrice'=> $this->total_price,
+            'amount'=> $this->amount,
         ];
     }
 }
