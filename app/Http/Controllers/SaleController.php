@@ -45,7 +45,6 @@ class SaleController extends Controller
         $count = Sale::get()->count();
         $sale = new Sale();
         $sale->invoice = $count+1;
-//        $this->discountStock($user);
         $sale->total = $this->calculateTotal($user);
         $sale->user()->associate(User::find($user));
         $sale->payment()->associate(Payment::find(1));
