@@ -6,11 +6,11 @@ use App\Http\Resources\V1\Sale\SaleCollection;
 use App\Http\Resources\V1\Sale\SaleResource;
 use App\Models\Car;
 use App\Models\Payment;
-use App\Models\Product;
 use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SaleController extends Controller
 {
@@ -93,5 +93,14 @@ class SaleController extends Controller
                 'code' => '200'
             ]
         ])->response()->setStatusCode(200);
+    }
+
+    public function downloadSale(Sale $sale)
+    {
+        $cars= Car::where('sale_id', $sale->id)->get();
+        $pdf = PDF::loadView('invoice',['cars'=>$cars]);
+
+        return $pdf->stream();
+
     }
 }

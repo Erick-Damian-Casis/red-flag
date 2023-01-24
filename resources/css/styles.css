@@ -1,0 +1,60 @@
+.titulo{
+    font-size: 1.1em;
+    font-family:  Solway;
+}
+
+
+div .info{
+    background-color: #001D3D;
+}
+
+.navbar{
+    background-color: #EEEEEE;
+height: 140px;
+}
+
+p{
+    font-size: 0.9em;
+    color:red;
+}
+
+footer p{
+    color: black;
+}
+
+
+table tbody{
+    background-color: #001D3D;
+}
+
+thead{
+    background-color: #EEEEEE;
+
+}
+
+thead tr p{
+    color:#001D3D;
+    font-weight: bold;
+}
+
+table p{
+    color:white;
+
+}
+
+.producto{
+    color:#000000;
+}
+
+.value{
+    background-color: #EEEEEE;
+    font-weight: bold;
+}
+
+
+
+.descarga{
+    background-color: #FF5400;
+    color: #EEEEEE;
+}
+

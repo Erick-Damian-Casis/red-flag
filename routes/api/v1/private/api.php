@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('cars/{car}', [CarController::class, 'destroy']);
         // Sale
         Route::get('sales-user', [SaleController::class, 'salesByUser']);
+
         Route::get('sales/{sale}', [SaleController::class, 'show']);
         Route::get('sales', [SaleController::class, 'store']);
         // User
@@ -58,6 +59,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('logout',[AuthController::class, 'logout']);
 });
+
+Route::get('download-sales/{sale}', [SaleController::class, 'downloadSale']);
 
 
 
