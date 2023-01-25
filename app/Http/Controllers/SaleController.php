@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\V1\Car\CarResource;
+use App\Http\Resources\V1\Product\ProductResource;
 use App\Http\Resources\V1\Sale\SaleCollection;
 use App\Http\Resources\V1\Sale\SaleResource;
 use App\Models\Car;
 use App\Models\Payment;
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -90,7 +93,7 @@ class SaleController extends Controller
             'msg'=>[
                 'summary' => 'success',
                 'detail' => '',
-                'code' => '200'
+                'code' => '200',
             ]
         ])->response()->setStatusCode(200);
     }
@@ -98,7 +101,19 @@ class SaleController extends Controller
     public function downloadSale(Sale $sale)
     {
         $cars= Car::where('sale_id', $sale->id)->get();
-        $pdf = PDF::loadView('invoice',['cars'=>$cars]);
+        $products = [];
+        foreach ($cars as $car){
+            $product =Product::find($car->product_id);
+            array_push($products, $product);
+        }
+        $user = User::find($sale->user_id);
+
+        $pdf = PDF::loadView('invoice',[
+            'cars'=> $cars,
+            'user'=>$user,
+            'sale'=>$sale,
+            'products'=> $products,
+            ]);
 
         return $pdf->stream();
 

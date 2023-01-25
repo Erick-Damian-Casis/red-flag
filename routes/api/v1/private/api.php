@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('sales-user', [SaleController::class, 'salesByUser']);
 
         Route::get('sales/{sale}', [SaleController::class, 'show']);
-        Route::get('sales', [SaleController::class, 'store']);
+        Route::get('sales-create', [SaleController::class, 'store']);
         // User
         Route::get('users', [UserController::class, 'index']);
         Route::get('users-profile', [UserController::class, 'show']);
