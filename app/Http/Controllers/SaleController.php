@@ -114,8 +114,6 @@ class SaleController extends Controller
             'sale'=>$sale,
             'products'=> $products,
             ]);
-
         return $pdf->stream();
-
     }
 }

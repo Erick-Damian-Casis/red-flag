@@ -56,11 +56,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('users/{user}', [UserController::class, 'destroy']);
         // Chat
         Route::post('messages', [ChatController::class, 'message']);
-
     Route::get('logout',[AuthController::class, 'logout']);
 });
 
 Route::get('download-sales/{sale}', [SaleController::class, 'downloadSale']);
+Route::put('users-admin/{user}', [UserController::class, 'assignRoleAdmin']);
+Route::put('users-client/{user}', [UserController::class, 'revokeRoleAdmin']);
 
 
 

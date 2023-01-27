@@ -66,4 +66,30 @@ class UserController extends Controller
             ]
         ])->response()->setStatusCode(200);
     }
+
+    public function revokeRoleAdmin (User $user){
+        $user->removeRole('admin');
+        $user->assignRole('user');
+        $user->save();
+        return(new UserResource($user))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
+    }
+
+    public function assignRoleAdmin (User $user){
+        $user->removeRole('user');
+        $user->assignRole('admin');
+        $user->save();
+        return(new UserResource($user))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => '',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
+    }
 }
