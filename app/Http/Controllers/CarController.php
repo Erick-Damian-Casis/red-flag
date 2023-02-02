@@ -43,11 +43,11 @@ class CarController extends Controller
         $car = new Car();
         $car->product()->associate(Product::find($request->input('product')));
         $car->user()->associate(User::find($user));
-
         $car->size()->associate(Catalogue::find($request->input('size')));
         $car->color()->associate(Catalogue::find($request->input('color')));
         $car->amount = $request->input('amount');
         $car->total_price = $this->calculatePrice($car);
+        $this->discountStock($car);
         $car->save();
 
         return (new CarResource($car))->additional([
@@ -92,5 +92,12 @@ class CarController extends Controller
         $price = $car->product->price_discount;
         $amount = $car->amount;
         return $price * $amount;
+    }
+
+    private function discountStock($car){
+        $amount = $car->amount;
+        $product = Product::find($car->product_id);
+        $product->stock = $product->stock - $amount;
+        $product->save();
     }
 }

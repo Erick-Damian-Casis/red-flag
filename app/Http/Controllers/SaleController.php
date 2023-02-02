@@ -71,7 +71,7 @@ class SaleController extends Controller
             $total = $total + $car->total_price;
         }
         $iva = $total * 0.12;
-        return $total-$iva;
+        return $total+$iva;
     }
 
     private function invoiceProducts($sale, $user){
