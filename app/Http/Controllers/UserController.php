@@ -43,7 +43,6 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
-        $user->photo_profile = $request->input('photoProfile');
         $user->password =  Hash::make($request->input('password'));
         $user->save();
         return(new UserResource($user))->additional([
