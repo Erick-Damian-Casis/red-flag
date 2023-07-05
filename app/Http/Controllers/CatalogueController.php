@@ -10,7 +10,8 @@ class CatalogueController extends Controller
 {
     public function getGender()
     {
-        $catalogues= Catalogue::where('type','GENDER')->get();
+        $catalogues= Catalogue::where('type','CARRER')->get();
+        \Log::info($catalogues);
         return (new CatalogueCollection($catalogues))->additional([
             'msg'=>[
                 'summary' => 'success',

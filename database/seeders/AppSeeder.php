@@ -18,24 +18,24 @@ class AppSeeder extends Seeder
     public function run()
     {
         Catalogue::factory()->create([
-            'name'=>'Camisa',
-            'type'=> 'category',
+            'name'=>'Food',
+            'type'=> 'Category',
         ]);
         Catalogue::factory()->create([
-            'name'=>'Pantalon',
-            'type'=> 'category',
+            'name'=>'Craft',
+            'type'=> 'Category',
         ]);
         Catalogue::factory()->create([
-            'name'=>'Abrigo',
-            'type'=> 'category',
+            'name'=>'Clothes',
+            'type'=> 'Category',
         ]);
         Catalogue::factory()->create([
-            'name'=>'Hombre',
-            'type'=> 'gender',
+            'name'=>'Software',
+            'type'=> 'Carrer',
         ]);
         Catalogue::factory()->create([
-            'name'=>'Mujer',
-            'type'=> 'gender',
+            'name'=>'Marketing',
+            'type'=> 'Carrer',
         ]);
         Catalogue::factory()->create([
             'name'=>'Negro',

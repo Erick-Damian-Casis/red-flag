@@ -64,7 +64,7 @@ class SaleController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    //calcular el iva de la factura
+    //calcular el iva
 
     private function calculateTotal($user){
         $cars = Car::where("user_id",$user)->get();
