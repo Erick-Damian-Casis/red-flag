@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('products', [ProductController::class, 'index']);
         // Products
         Route::get('products/{product}', [ProductController::class, 'show']);
-        Route::get('products-male', [ProductController::class, 'productMale']);
-        Route::get('products-female', [ProductController::class, 'productFemale']);
+        Route::get('products-software', [ProductController::class, 'productSoftware']);
+        Route::get('products-marketing', [ProductController::class, 'productMarketing']);
         Route::get('products', [ProductController::class, 'index']);
 
         // favorites
@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('favorites/{favorite}', [FavoriteController::class, 'destroy']);
 
         // Catalogue
-        Route::get('gender-catalogues', [CatalogueController::class, 'getGender']);
+        Route::get('carrer-catalogues', [CatalogueController::class, 'getCarrer']);
         Route::get('category-catalogues', [CatalogueController::class, 'getCategory']);
         Route::get('color-catalogues', [CatalogueController::class, 'getColor']);
         Route::get('size-catalogues', [CatalogueController::class, 'getSize']);

@@ -24,9 +24,9 @@ class ProductController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    public function productMale()
+    public function productSoftware()
     {
-        $products= Product::where('gender_id',4)->get();
+        $products= Product::where('carrer_id',4)->get();
         return (new ProductCollection($products))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -36,9 +36,9 @@ class ProductController extends Controller
         ])->response()->setStatusCode(200);
     }
 
-    public function productFemale()
+    public function productMarketing()
     {
-        $products= Product::where('gender_id',5)->get();
+        $products= Product::where('carrer_id',5)->get();
         return (new ProductCollection($products))->additional([
             'msg'=>[
                 'summary' => 'success',
@@ -66,8 +66,8 @@ class ProductController extends Controller
         $product->category()
             ->associate(Catalogue::find($request->input('category')));
 
-        $product->gender()
-            ->associate(Catalogue::find($request->input('gender')));
+        $product->carrer()
+            ->associate(Catalogue::find($request->input('carrer')));
 
         $product->name = $request->input('name');
         $product->price = $request->input('price');
@@ -99,7 +99,7 @@ class ProductController extends Controller
         $product->catalogue()
             ->associate(Catalogue::find($request->input('category')));
         $product->catalogue()
-            ->associate(Catalogue::find($request->input('gender')));
+            ->associate(Catalogue::find($request->input('carrer')));
 
         $product->name = $request->input('name');
         $product->price = $request->input('price');

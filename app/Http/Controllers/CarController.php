@@ -47,28 +47,17 @@ class CarController extends Controller
         $car->color()->associate(Catalogue::find($request->input('color')));
         $car->amount = $request->input('amount');
         $car->total_price = $this->calculatePrice($car);
-        $amount = $car->amount;
-        $product = Product::find($car->product_id);
-        if($amount <= $product->stock){
-            $product->stock = $product->stock - $amount;
-            $product->save();
-            $car->save();
+        $this->discountStock($car);
+        $car->save();
 
-            return (new CarResource($car))->additional([
-                'msg'=>[
-                    'summary' => 'success',
-                    'detail' => 'El producto a sido agregado',
-                    'code' => '200'
-                ]
-            ])->response()->setStatusCode(200);
-        }else{
-            return response([
-                'message'=>'Stock limit reached'
-            ], 404);
-        }
-
+        return (new CarResource($car))->additional([
+            'msg'=>[
+                'summary' => 'success',
+                'detail' => 'El producto a sido agregado',
+                'code' => '200'
+            ]
+        ])->response()->setStatusCode(200);
     }
-
 
     public function update(Request $request,Car $car)
     {
@@ -105,4 +94,10 @@ class CarController extends Controller
         return $price * $amount;
     }
 
+    private function discountStock($car){
+        $amount = $car->amount;
+        $product = Product::find($car->product_id);
+        $product->stock = $product->stock - $amount;
+        $product->save();
+    }
 }

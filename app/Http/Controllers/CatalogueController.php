@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CatalogueController extends Controller
 {
-    public function getGender()
+    public function getCarrer()
     {
         $catalogues= Catalogue::where('type','CARRER')->get();
         \Log::info($catalogues);

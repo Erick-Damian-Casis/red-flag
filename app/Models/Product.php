@@ -26,7 +26,7 @@ class Product extends Model
         return $this->belongsTo(Catalogue::class);
     }
 
-    function gender(){
+    function carrer(){
         return $this->belongsTo(Catalogue::class);
     }
 

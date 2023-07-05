@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('gender_id')
+            $table->foreignId('carrer_id')
                 ->constrained('catalogues')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

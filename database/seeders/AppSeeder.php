@@ -37,39 +37,6 @@ class AppSeeder extends Seeder
             'name'=>'Marketing',
             'type'=> 'Carrer',
         ]);
-        Catalogue::factory()->create([
-            'name'=>'Negro',
-            'type'=> 'color',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'Gris',
-            'type'=> 'color',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'Azul',
-            'type'=> 'color',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'Anaranjado',
-            'type'=> 'color',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'XL',
-            'type'=> 'size',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'S',
-            'type'=> 'size',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'M',
-            'type'=> 'size',
-        ]);
-        Catalogue::factory()->create([
-            'name'=>'L',
-            'type'=> 'size',
-        ]);
-
         User::factory()->create([
             'name'=> 'Danny Casis',
             'email'=> 'danny_casis@gmail.com',
