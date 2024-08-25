@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('password');
-            $table->string('photo_profile');
         });
     }
 

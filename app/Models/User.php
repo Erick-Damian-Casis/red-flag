@@ -18,7 +18,6 @@ class User extends Authenticatable
         'password',
         'address',
         'phone',
-        'photo_profile',
     ];
     // Relationship
 

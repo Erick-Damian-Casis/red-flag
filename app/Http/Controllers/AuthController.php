@@ -18,11 +18,6 @@ class AuthController extends Controller
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->password =  Hash::make($request->input('password'));
-        if ($request->hasFile('photoProfile')){
-            $user->photo_profile = Storage::url($request->file('photoProfile')
-                ->store('public/photoProfiles')
-            );
-        }
         $user->assignRole('user');
         $user->save();
         return response([

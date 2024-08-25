@@ -18,7 +18,6 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'address'=> $this->faker->address(),
-            'photo_profile'=> $this->faker->imageUrl(640, 480, 'animals', true),
             'phone'=> $this->faker->phoneNumber(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ];
