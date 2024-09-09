@@ -11,22 +11,23 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteController;
 
 
+Route::get('category-catalogues', [CatalogueController::class, 'getCategory']);
+Route::post('products', [ProductController::class, 'store']);
+Route::get('products', [ProductController::class, 'index']);
+Route::get('products', [ProductController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::post('products', [ProductController::class, 'store']);
         Route::put('products/{product}', [ProductController::class, 'update']);
         Route::delete('products/{product}', [ProductController::class, 'destroy']);
         Route::get('sales', [SaleController::class, 'index']);
         Route::get('users', [UserController::class, 'index']);
     });
-        Route::get('products', [ProductController::class, 'index']);
         // Products
         Route::get('products/{product}', [ProductController::class, 'show']);
         Route::get('products-software', [ProductController::class, 'productSoftware']);
         Route::get('products-marketing', [ProductController::class, 'productMarketing']);
-        Route::get('products', [ProductController::class, 'index']);
 
         // favorites
         Route::get('favorites', [FavoriteController::class, 'index']);
@@ -35,7 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Catalogue
         Route::get('carrer-catalogues', [CatalogueController::class, 'getCarrer']);
-        Route::get('category-catalogues', [CatalogueController::class, 'getCategory']);
         Route::get('color-catalogues', [CatalogueController::class, 'getColor']);
         Route::get('size-catalogues', [CatalogueController::class, 'getSize']);
         // cars

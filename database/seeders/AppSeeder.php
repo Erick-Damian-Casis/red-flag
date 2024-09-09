@@ -18,15 +18,15 @@ class AppSeeder extends Seeder
     public function run()
     {
         Catalogue::factory()->create([
-            'name'=>'Food',
+            'name'=>'Joyas',
             'type'=> 'Category',
         ]);
         Catalogue::factory()->create([
-            'name'=>'Craft',
+            'name'=>'Monedas',
             'type'=> 'Category',
         ]);
         Catalogue::factory()->create([
-            'name'=>'Clothes',
+            'name'=>'Lingotes',
             'type'=> 'Category',
         ]);
         Catalogue::factory()->create([

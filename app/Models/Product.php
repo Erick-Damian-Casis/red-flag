@@ -26,10 +26,6 @@ class Product extends Model
         return $this->belongsTo(Catalogue::class);
     }
 
-    function carrer(){
-        return $this->belongsTo(Catalogue::class);
-    }
-
     function cars(){
         return $this->hasMany(Car::class);
     }

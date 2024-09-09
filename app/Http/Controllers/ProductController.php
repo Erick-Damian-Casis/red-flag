@@ -66,9 +66,6 @@ class ProductController extends Controller
         $product->category()
             ->associate(Catalogue::find($request->input('category')));
 
-        $product->carrer()
-            ->associate(Catalogue::find($request->input('carrer')));
-
         $product->name = $request->input('name');
         $product->price = $request->input('price');
 

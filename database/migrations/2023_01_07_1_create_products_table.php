@@ -23,11 +23,6 @@ class CreateProductsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('carrer_id')
-                ->constrained('catalogues')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
             $table->string('name')->comment('nombre del producto');
             $table->float('price')->comment('costo del producto por unidad');
             $table->float('score')->comment('Puntuación de calidad');

@@ -15,11 +15,6 @@ class Catalogue extends Model
         'type'
     ];
 
-    // Relationship
-    function products(){
-        return $this->hasMany(Product::class);
-    }
-
     // Set
     public function setNameAttribute($value)
     {
